@@ -11,10 +11,10 @@ class CustomManager(BaseUserManager):
         return user
         
     def create_superuser(self, email, user_name, password, **other_fields):
-    	other_fields.setdefault('is_staff', True)
-    	other_fields.setdefault('is_superuser', True)
-    	other_fields.setdefault('is_active', True)
-    	return self.create_user(email, user_name, password, **other_fields)
+        other_fields.setdefault('is_staff', True)
+        other_fields.setdefault('is_superuser', True)
+        other_fields.setdefault('is_active', True)
+        return self.create_user(email, user_name, password, **other_fields)
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
@@ -34,6 +34,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['user_name']
     
     def __str__(self):
-    	return self.user_name
+        return self.user_name
     
 

@@ -23,4 +23,8 @@ class Cart(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     customuser = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     
-    quantity = models.PositiveIntegerField()
+    quantity = models.PositiveIntegerField(default=1)
+
+    @property
+    def total_cost(self):
+        return self.quantity * self.item.price

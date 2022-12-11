@@ -1,22 +1,27 @@
 {% extends 'base.html' %}
 {% block title %}Main page with all items{% endblock title %}
 {% block content %}
-<div class="row row-cols-1 row-cols-md-3 g-4">
-
-    {% for item in object_list %}
-    <div class="col">
+<p></p>
+<div class="row row-cols-1 row-cols-md-6 g-4">
+{% for item in object_list %}
+  <div class="col">
+    <div class="card h-100">
       <a href="{% url 'detail_item' item.pk %}">
-        <div class="card h-100 bg-dark text-white">
-          <img src="{{ item.image.url }}" class="card-img" alt="{{ item.name }}">
-          <div class="card-img-overlay">
-            <h5 class="card-title">{{ item.name }}</h5>
-            <p class="card-text">{{ item.user }}</p>
-            <p class="card-text">{{ item.price }}</p>
-          </div>
-        </div>
+      <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}">
       </a>
+      <div class="card-body">
+        <h5 class="card-title">{{ item.name }}</h5>
+        <!--<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+      </div>
+      <div class="card-footer">
+        <small>{{ item.price }}</small>
+        <form action="/add-to-cart">
+          <input type="hidden" name="item_id" value={{ item.id }}>
+          <button type="submit">В корзину</button>
+        </form>
+      </div>
     </div>
-    {% endfor %}
-
+  </div>
+{% endfor %}
 </div>
 {% endblock content %}
